@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 타이어 개수를 입력하면 장착가능한 자동차의 대수를 정수로 출력하시오. -->
+    <label for="count">타이어 개수</label>
+    <input type="text" name="count" id="count" placeholder="타이어개수를 입력하세요">
+    <button onclick='print()'>입력</button>
+    <label for="cnt_of_car">자동차 대수</label>
+    <input type="text" name="cnt_of_car" id="cnt_of_car"
+           placeholder="자동차 대수가 출력" disabled>대
+    <script>
+        function print(){
+            const cnt = document.getElementById('count').value;
+            const count = parseInt(cnt);
+            const countOfCar = Math.floor(count/4);
+            document.getElementById('cnt_of_car').value = countOfCar;
+        }
+    </script>
+</body>
+</html>
