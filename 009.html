@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>반복문 연습2</title>
+</head>
+<body>
+    <script>
+        const arr = [77, 55, 80, 60, 90, 95, 75, 65];
+
+        // 80점 이상인 성적의 합계
+        const sum1 = 0, sum2 = 0, sum3 = 0;   // 한 번에 변수 초기화
+        for(let i=0; i<arr.length; i++){
+            if(arr[i]>=80) sum1 += arr[i];
+        }
+        console.log(sum1);
+
+        // 성적의 평균
+        for(let i=0; i<arr.length; i++){
+            sum2 += arr[i]
+            }
+        console.log('평균:'+(sum2/arr.length));
+
+        // 70~80점인 성적의 합계
+        for(let i=0; i<arr.length; i++){
+           if(arr[i]>=70 && arr[i]<=80) sum3 += arr[i];
+        }
+        console.log(sum3);
+
+        // 반복문을 이용해 배열을 거꾸로 출력
+        for(let i=arr.length-1; i>-1; i--){
+            console.log(arr[i]);
+        }
+
+        // 합격점수(70점이상)의 평균
+        let sum4 = 0, count = 0;
+        for(let i=0; i<arr.length; i++){
+            if(arr[i]>=70) sum4 += arr[i];
+            count++
+        }
+        console.log(sum4/count);
+        
+    </script>
+</body>
+</html>

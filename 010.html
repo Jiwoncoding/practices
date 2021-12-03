@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>반복문 연습3</title>
+</head>
+<body>
+    <script>
+        const arr = [77, 55, 80, 60, 90, 95, 75, 65];
+
+        // 1등 점수의 출력
+        let jumsu0 = 0 // let jumsu0 = arr[0]
+        for(let i=0; i<arr.length; i++){
+            if(arr[i]>jumsu0) jumsu0 = arr[i];
+        }
+        console.log(jumsu0);
+
+        // 배열에서 3의 배수번째 위치(0,3,6,9...)의 원소 합계
+        let count1 = 0;
+        for(let i=0; i<arr.length; i++){
+            if(arr[i]%3===0) count1 ++;
+        }
+        console.log(count1);
+
+        // ↑ 합계는
+        let sum7 = 0;
+        for(let i=0; i<arr.length; i++){
+            // 틀린부분 if(arr[i]%3===0) sum7 += arr[i];
+            if(i%3==0) sum7 += arr[i];
+        }
+        console.log(sum7);
+
+        // 성적이 우(80~89)인 점수의 합계
+        let jumsu1 = 0;
+        for(let i=0; i<arr.length; i++){
+            if(arr[i]>=80 && arr[i]<90) jumsu1 += arr[i];
+        }
+        console.log(jumsu1);
+        
+        // 70점 이상 80점 이하인 점수의 개수
+        let jumsu2 = 0;
+        for(let i=0; i<arr.length; i++){
+            if(arr[i]>=70 && arr[i]<=80) jumsu2 ++
+        }
+        console.log(jumsu2);
+
+        // 짝수인 점수의 개수
+        let jumsu3 = 0, count2 = 0;
+        for(let i=0; i<arr.length; i++){
+            if(arr[i]%2===0) count2 ++;
+        }
+        console.log(count2);
+
+        // 최저 점수 출력
+        let jumsu4 = 100;
+        for(let i=0; i<arr.length; i++){
+            if(arr[i]<jumsu4) jumsu4 = arr[i];
+        }
+        console.log(jumsu4);
+
+        // 70점 이상 80점 이하인 점수 중 최고 점수
+        let max_jumsu = 0;
+        for(let i=0; i<arr.length; i++){
+         if(arr[i]>=70 && arr[i]<=80){                  // skill~~~
+                if(arr[i]>max_jumsu) max_jumsu = arr[i];
+            }
+        }
+        console.log(max_jumsu);
+
+
+        // 짝수인 점수의 합계와 홀수인 점수의 합계
+        let even = 0, odd = 0;
+        for(let i=0; i<arr.length; i++){
+            if(arr[i]%2===0) even += arr[i];
+            if(arr[i]%2===1) odd += arr[i];
+        }
+        console.log('짝수합계:'+even+'홀수합계:'+odd);
+
+        // 70점 이상이면 합격. 합격 점수의 평균
+        let pass = 0, count = 0;
+        for(let i=0; i<arr.length; i++){
+            if(arr[i]>=70){
+                pass += arr[i];
+                count++;
+            }
+        }
+        console.log(pass/count);
+
+        // 두번째로 높은 점수를 출력 ★ 아래 풀이 보고 다시 풀어봐... 
+        // let max3=0, result1=0;
+        // for(let i=0; i<arr.length; i++) {
+        //     if(arr[i]>max3) {
+        //         result1 = max3;
+        //         max3 = arr[i];
+        //     }
+        // }
+        // console.log(result1);
+
+        // 최고 점수와 최저 점수를 제외한 점수의 합계
+        let max = 0, min = 100, sum1 = 0;
+        for(let i=0; i<arr.length; i++){
+            if(arr[i]>max) max = arr[i];
+            if(arr[i]<min) min = arr[i];
+            // 틀린부분 for(let j=0; j<arr.length; j++){
+            //     sum1 += arr[i];
+            // }
+            sum1 += arr[i];
+        }
+        console.log(sum1-max-min);
+        
+    </script>
+</body>
+</html>

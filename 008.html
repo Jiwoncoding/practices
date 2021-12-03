@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>반복문 연습1</title>
+</head>
+<body>
+    <script>
+        const arr = [77, 55, 80, 60, 90, 95, 75, 65];
+
+        // 홀수번 째 원소의 합계
+        let sum1 = 0;
+        for(let i=0; i<arr.length-1; i++){
+            if(i%2===1) sum1 += arr[i];
+        }
+        console.log(sum1);
+
+        // 홀수들의 합계
+        let sum2 = 0;
+        for(let i=0; i<arr.length-1; i++){
+            if(arr[i]%2===1) sum2 += arr[i];
+        }
+        console.log(sum2);
+
+        // 70점 이상의 합계
+        let sum3 = 0;
+        for(let i=0; i<arr.length; i++){
+            if(arr[i]>=70) sum3 += arr[i];
+        }
+        console.log(sum3);
+
+    </script>
+</body>
+</html>
