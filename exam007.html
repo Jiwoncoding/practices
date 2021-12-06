@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const ar = [77,55,80,60,90,95,75,65];
+        let woosoo=0, count=0, avg=0;
+        // 90점이상이면 우수, 70~89점이면 통과, 70점미만이면 불합격이다
+        // 우수인 학생의 평균 점수를 출력하시오.
+        for(let i=0; i<ar.length; i++){
+            if(ar[i]>=90) {
+                woosoo+=ar[i];
+                count++;
+            }
+            // if(ar[i]>=70 && ar[i]<90) ("통과");
+            // else ("불합격");
+        }
+        console.log("우수인학생의 평균점수는"+(woosoo/count));
+    </script>
+</body>
+</html>

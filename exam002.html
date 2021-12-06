@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const ar = [77,55,80,60,90,95,75,65];
+        
+        // 3의 배수 또는 5의 배수인 점수의 합계를 구하시오
+        let sum=0;
+        for(let i=0; i<ar.length; i++){
+            if(ar[i]%3===0 || ar[i]%5===0) sum += ar[i];
+        }
+        console.log(sum);
+        
+    </script>
+</body>
+</html>

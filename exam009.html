@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label for="jumsu">점수</label>
+    <input type="text" name="jumsu" id="jumsu">
+    <button onclick='panjung()'>수우미양가 판정</button>
+
+    <!--
+        점수를 입력하고 판정 버튼을 클릭하면 수, 우, 미, 양, 가를 출력하시오
+    -->
+    <script>
+        function panjung(){
+            let input = parseInt(document.getElementById('jumsu').value);
+            // ★ 예외처리
+            if(isNaN(input)==true){
+                alert("숫자를 입력하세요.")
+                return
+            }
+            if(input>=90) alert("수");
+            else if(input>=80) alert("우");
+            else if(input>=70) alert("미");
+            else if(input>=60) alert("양");
+            else alert("가");
+        }
+    </script>
+</body>
+</html>

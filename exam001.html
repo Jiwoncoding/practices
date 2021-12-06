@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        
+        let a = 70, b = 80;
+        let max, min;
+
+        // 큰 수와 작은 수를 출력하시오
+        if(a>b) {
+            max=a;
+            min=b;
+        }
+        if(a<b){
+            max=b;
+            min=a;
+        }
+        console.log("큰수:"+max+"작은수:"+min);
+
+        // 삼항 연산자로 풀 수도 있다
+        let large = a>b ? a : b;
+        let small = a>b ? a : b;
+
+    </script>
+</body>
+</html>

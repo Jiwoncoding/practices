@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const ar = [77,55,80,60,90,95,75,65];
+        // 2등 점수를 제외한 점수의 합계를 출력하시오
+        let top1=0, top2=0, sum=0;
+        for(let j=0; j<ar.length; j++) sum+=ar[j];
+        for(let i=0; i<ar.length; i++){
+            if(ar[i]>top2){
+                top2=top1;
+                top1=ar[i];
+            }
+        }
+        console.log(sum-top2);
+     </script>
+</body>
+</html>

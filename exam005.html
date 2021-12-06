@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label for="year">년도</label>
+    <input type="text" name="" id="year">
+    <button onclick='panjung()'>윤년 판정</button>
+
+    <!--
+        년도를 입력하고 윤년 판정 버튼을 클릭하면 4의 배수인 년도라면 "윤년입니다", 아니면 "윤년이 아닙니다"
+        라고 출력하시오
+    -->
+    <script>
+        function panjung(){
+            let year = parseInt(document.getElementById('year').value);
+            if(year%4===0) alert('윤년입니다.');
+            else alert('윤년이아닙니다.');
+        }
+    </script>
+</body>
+</html>

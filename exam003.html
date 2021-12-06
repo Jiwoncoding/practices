@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const ar = [77,55,80,60,90,95,75,65];
+        
+        // 70점이상이면 합격이다. 합격자와 불합격자의 인원수를 출력하시오
+        let pass=0, notpass=0;
+        for(let i=0; i<ar.length; i++){
+            if(ar[i]>=70) pass++;
+            else notpass++;
+        }
+        console.log("합격자는"+pass+"명이고, 불합격자는"+notpass+"명이다.");
+    </script>
+</body>
+</html>
