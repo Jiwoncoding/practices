@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const scores = [
+            {name: '고길동', kor:77, eng:85},{name: '김갑수', kor:55, eng:50}, {name: '정윤영', kor:80, eng:65}, 
+            {name: '이설아', kor:60, eng:60}, {name: '조영주', kor:90, eng:85}, {name: '박현수', kor:95, eng:100}, 
+            {name: '최일관', kor:75, eng:80}, {name: '한정석', kor:65, eng:75}
+        ]
+
+        // scores 배열에서 각 학생별로 국어 성적과 영어 성적의 합계를 출력하시오
+        // 출력 예          고길동 : 162
+        for(const score of scores){
+            console.log(score.name+":"+(score.kor+score.eng));
+        }
+    </script>
+</body>
+</html>

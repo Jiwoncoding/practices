@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const scores = [
+            {name: '고길동', kor:77, eng:85},{name: '김갑수', kor:55, eng:50}, {name: '정윤영', kor:80, eng:65}, 
+            {name: '이설아', kor:60, eng:60}, {name: '조영주', kor:90, eng:85}, {name: '박현수', kor:95, eng:100}, 
+            {name: '최일관', kor:75, eng:80}, {name: '한정석', kor:65, eng:75}
+        ]
+
+        // 국어점수가 우인 학생의 숫자와 영어점수가 우인 학생의 숫자를 출력하시오
+        let korWoo=0, engWoo=0;
+        for(const score of scores){
+            if(score.kor>=85) korWoo++;
+            if(score.eng>=85) engWoo++;
+        }
+        console.log("국어점수가 우인 학생의 수:"+korWoo);
+        console.log("영어점수가 우인 학생의 수:"+engWoo);
+    </script>
+</body>
+</html>

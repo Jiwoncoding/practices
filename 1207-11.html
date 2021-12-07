@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const scores = [
+            {name: '고길동', kor:77, eng:85},{name: '김갑수', kor:55, eng:50}, {name: '정윤영', kor:80, eng:65}, 
+            {name: '이설아', kor:60, eng:60}, {name: '조영주', kor:90, eng:85}, {name: '박현수', kor:95, eng:100}, 
+            {name: '최일관', kor:75, eng:80}, {name: '한정석', kor:65, eng:75}
+        ]
+        
+        // 국어, 영어 각각 100점인 만점자가 있는 지 출력하시오
+        let isAll100=false;
+        for(score of scores){
+            if(score.kor===100 || score.eng===100) isAll100=true;
+        }
+        if(isAll100){
+            alert("만점자가 있습니다.");
+        } else alert("만점자가 없습니다.");
+    </script>
+</body>
+</html>
