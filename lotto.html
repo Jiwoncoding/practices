@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>6개의 숫자 랜덤으로 뽑기</title>
+    <style>
+        .ball {
+            display: inline-block;
+            width: 80px;
+            height: 80px;
+            background-color: rgb(255, 196, 0);
+            border-radius: 50%;
+            line-height: 80px;
+            font-size: 50px;
+            margin: 5px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <script>
+
+        function compare(a,b){
+            return b-a; // 내림차순 정렬
+        }
+
+        let list=[];
+        for(let i=0; i<=45; i++){
+            list.push(i);
+        }
+        let result=[];
+        for(let i=0; i<6; i++){
+            let index = Math.floor(Math.random()*list.length);
+            let num = list[index];
+            list.splice(index,1);
+            result.push(num);
+        }
+
+        result.sort(compare);
+
+        for(let i=0; i<6; i++){
+            document.write('<span class="ball">'+result[i]+'</span>');
+        }
+    </script>
+</body>
+</html>
