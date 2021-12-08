@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>시계 만들기</title>
+</head>
+<body>
+    <button onclick='start()' id="start">시작</button>
+    <button onclick='stop()' id="stop" disabled>종료</button>
+    <div id='clock'></div>
+<script>
+    let timer = undefined;
+    function start(){
+        timer = setInterval(function(){
+        document.getElementById('clock').innerHTML = new Date();
+        }, 1000);
+        document.getElementById('start').disabled = true;
+        document.getElementById('stop').disabled = false;
+    }
+    function stop(){
+        // clearInterval함수의 인자로는 intervalID가 필요
+        clearInterval(timer);
+        document.getElementById('start').disabled = false;
+        document.getElementById('stop').disabled = true;
+    }
+</script>
+</body>
+</html>
