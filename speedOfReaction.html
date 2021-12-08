@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>반응 속도 측정기</title>
+</head>
+<body>
+    <h1>반응 속도 측정</h1>
+    <p>준비 버튼을 누르면 아래 숫자가 증가합니다. 숫자가 100이 되면 누르세요.</p>
+    <p>누르세요. 버튼을 클릭하면 클릭까지 걸린 시간이 출력됩니다.</p>
+    <div id="target">...</div>
+    <hr>
+    <button onclick="ready()" id="readybtn">준비</button>
+    <button onclick="press()" id="pressbtn" disabled>누르세요</button>
+    <script>
+        let index=0, timer=undefined;
+        const target = document.querySelector('#target');
+        const readybtn = document.querySelector('#readybtn');
+        const pressbtn = document.querySelector('#pressbtn');
+        function ready(){
+            timer = setInterval(function(){
+            readybtn.disabled=true;
+            index++;
+            target.innerHTML=index;
+            if(index>=1000) pressbtn.disabled=false;
+        }, 1);
+        }   
+        function press(){
+            clearInterval(timer);
+            target.innerHTML="클릭소요시간:"+(index-1000)+"msec";
+            readybtn.disabled=false;
+            pressbtn.disabled=true;
+        }
+    </script>
+
+</body>
+</html>
