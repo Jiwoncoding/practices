@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>progressbar</title>
+    <style>
+        #myProgress {
+            width: 100%;
+            background-color: grey;
+        }
+        #myBar {
+            width: 0%;
+            height: 30px;
+            background-color: green;
+        }
+    </style>
+    <script>
+        // 버튼을 클릭하면 [일정 간격으로 100이 될 때 까지 #myBar의 width를 1씩 증가
+    window.onload = function() {
+    const button = document.querySelector('#click');
+    const myBar = document.querySelector('#myBar');
+    button.addEventListener('click', function() {
+        // #myBar의 너비는 0으로 한다
+        let width = 0;                          
+        // setInterval은 일정 간격으로 함수를 실행 -> 함수 병렬로 실행 -> thread
+        // 버튼을 클릭하면 버튼을 비활성화(다시 클릭하지 못하게 막는다)
+        button.disabled = true;
+        const timer = setInterval(function() {
+            // 너비 증가
+            width++;
+            if(width>100) {
+                // 프로그래스바의 너비가 100보다 크다면 -> 프로그래스바가 100%라면 스레드 중지 
+                clearInterval(timer);
+                // 버튼을 다시 클릭할 수 있도록 활성화
+                button.disabled = false;
+                } else {
+                // 프로그래스바의 너비가 100%가 아니다 -> 32라인에서 증가한 width를 너비로 지정
+                myBar.style.width = width+"%";
+                }
+        }, 10);
+    });
+  }
+    </script>
+</head>
+<body>
+    <div id="myProgress">
+        <div id="myBar"></div>
+    </div>
+    <button id="click">클릭</button>
+</body>
+</html>
