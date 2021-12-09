@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>성인 여부 체크</title>
+    <script>
+        window.onload=function(){
+            const year = document.querySelector("#year");
+            const btn = document.querySelector("#btn");
+            btn.addEventListener('click',function(){
+                const now = new Date();
+                const age = now.getFullYear()-parseInt(year.value);
+                if(age>=19) alert("성인");
+                else alert("미성년");
+            })
+        }
+    </script>
+</head>
+<body>
+    <label for="year">년도</label>
+    <input type="text" name="year" id="year">
+    <button id="btn">성인여부 출력</button>
+
+</body>
+</html>

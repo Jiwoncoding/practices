@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>숫자 두 개 입력받아 더하기</title>
+    <script>
+        window.onload=function(){
+           const firstEl = document.querySelector('#first');
+           const endEl = document.querySelector('#end');
+           const sumbtn = document.querySelector('#sum');
+           sumbtn.addEventListener('click',function(){
+            // 틀린부분   alert(firstEl.value+endEl.value);
+            const first = parseInt(firstEl.value);
+            const end = parseInt(endEl.value);
+            alert(first+end);
+           });
+        }
+    </script>
+</head>
+<body>
+    <lable for="first">시작하는 숫자</lable>
+    <input type="text" name="first" id="first">
+    <lable for="end">끝나는 숫자</lable>
+    <input type="text" name="end" id="end">
+    <button id="sum">더하기</button>
+</body>
+</html>
