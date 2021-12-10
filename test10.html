@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        window.onload=function(){
+            const pwEl = document.querySelector('#pw');
+            const loginEl = document.querySelector('#login');
+            loginEl.addEventListener('click', function(){
+                if(pwEl.value.length===0) alert("비밀번호는 필수입력입니다.");
+                else if(pwEl.value.langth<8 ||pwEl.value.langth>10) alert("비밀번호는 8~10자리입니다");
+                else alert("비밀번호를 확인합니다.");
+            })
+        }
+    </script>
+</head>
+<body>
+    <h1>비밀번호 확인</h1>
+    비밀번호<input type="password" id="pw"><button id="login">로그인</button>
+</body>
+</html>

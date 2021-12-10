@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        window.onload=function(){
+            const numEl = document.querySelector('#num');
+            const btnEl = document.querySelector('#btn');
+            const resultEl = document.querySelector("#result");
+            const print = btnEl.addEventListener('click', function(){
+                const num=parseInt(numEl.value);
+                if(isNaN(num) || num<0) {
+                    alert("0보다 큰 숫자를 입력해주세요");
+                }else {
+                    let sum = 0;
+                    for(let i=1; i<=num; i++){
+                    sum+=i;
+                }
+                resultEl.innerHTML = sum;
+            }
+            })
+        }
+    </script>
+</head>
+<body>
+    <h1>0보다 큰 숫자를 입력받아 1부터 그 숫자까지의 합계를 출력</h1>
+    <input type="text" id="num"><button id="btn">출력</button>
+    <div id="result"></div>
+</body>
+</html>

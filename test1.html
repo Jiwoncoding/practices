@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        window.onload = function() {
+            const nowDate = document.querySelector("#now");
+            setInterval(function() {
+                const date = new Date();
+                const print = date.getHours()+"시"+date.getMinutes()+"분"+date.getSeconds()+"초";
+                nowDate.innerHTML = print;
+            }, 1000);
+        }
+    </script>
+</head>
+<body>
+    <h1>17시 15분 20초와 같은 형식으로 출력하는 시계</h1>
+    <div id="now"></div>
+</body>
+</html>

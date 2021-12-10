@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>합격자 숫자, 평균 및 불합격자 숫자, 평균 출력</h1>
+    <p>const scores = [75,80,65,55,60,85,90,100,70,50,85,92];</p>
+    <p>scores 배열을 대상으로 70점이상이면 합격</p>
+    <div id="jumsu" style="color:blue"></div>
+    <script>
+        let pass=0, passCnt=0, fail=0, failCnt=0;
+        const scores = [75,80,65,55,60,85,90,100,70,50,85,92];
+        for(const score of scores){
+            if(score>=70){
+                pass+=score;
+                passCnt++
+            }
+            else{
+                fail+=score;
+                failCnt++;
+            }
+        }
+        // console.log(pass);
+        // console.log(passCnt);
+        // console.log(fail);
+        // console.log(failCnt);
+        const jumsu = document.querySelector('#jumsu');
+        jumsu.innerHTML = "합격자 숫자:"+pass+", 합격자 평균점수:"+(pass/passCnt)+", 불합격 숫자:"+fail+", 불합격자 평균점수:"+(fail/failCnt);
+    </script>
+</body>
+</html>

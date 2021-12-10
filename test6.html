@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>배열의 숫자 중 78에 가장 가까운 숫자 출력</h1>
+    <p>const scores = [75,80,65,55,60,85,90,100,70,50,85,92];</p>
+
+    <script>
+        const scores = [75,80,65,55,60,85,90,100,70,50,85,92];
+        const target = 78;
+        let near=0, abs=0, min =100;
+        for(let i = 0; i <scores.length; i++) {
+           abs = ( (scores[i] - target) < 0) ?
+            -(scores[i] - target) : (scores[i] - target);
+        if(abs < min) {
+        min = abs; 
+        near = scores[i];
+    }
+}
+console.log(near);
+
+    </script>
+</body>
+</html>

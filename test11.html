@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        const students = [ {이름: '홍길동', 국어: 77, 영어:85}, {이름: '전우치', 국어: 67, 영어:75},
+                          {이름: '임꺽정', 국어: 70, 영어:80}, {이름: '고길동', 국어: 85, 영어:65},
+                          {이름: '한정석', 국어: 90, 영어:85}, {이름: '조설아', 국어: 85, 영어:80} ];
+
+        window.onload=function(){
+            const print = document.querySelector('#print');
+            const cnt = document.querySelector('#cnt');
+            const avg = document.querySelector('#avg');
+            print.addEventListener('click',function(){
+                let sum=0, count=0;
+                for(student of students){
+                if(student.국어>=80 && student.영어>=80){
+                    count++;
+                    sum = sum+student.국어+student.영어;
+                }
+            }
+            cnt.innerHTML=count;
+            avg.innerHTML=sum/(count*2);
+            })
+        }
+    </script>
+</head>
+<body>
+    <h1>배열을 대상으로 합격자의 숫자와 평균 점수를 출력</h1>
+    <p>국어, 영어가 모두 80점이상이면 합격</p>
+    <button id="print">정보출력</button>
+    <div>합격자 수:<span id="cnt"></span></div>
+    <div>합격자 평균점수:<span id="avg"></span></div>
+</body>
+</html>
