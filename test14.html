@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        window.onload = function() {
+            const check1 = document.querySelector("#check1");
+            const check2 = document.querySelector("#check2");
+            const check3 = document.querySelector("#check3");
+            const check4 = document.querySelector("#check4");
+            check4.addEventListener('click', function() {
+                if(check4.checked==true) {
+                    check1.checked = true;
+                    check2.checked = true;
+                    check3.checked = true;
+                } else {
+                    check1.checked = false;
+                    check2.checked = false;
+                    check3.checked = false;
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <h1>약관 동의하기</h1>
+    <input type="checkbox" id="check1">약관 1
+    <input type="checkbox" id="check2">약관 2
+    <input type="checkbox" id="check3">약관 3
+    <input type="checkbox" id="check4">모두 동의
+</body>
+</html>

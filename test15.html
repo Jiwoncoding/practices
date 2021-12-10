@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        window.onload = function(){
+            const val1El= document.querySelector('#val1');
+            const val2El= document.querySelector('#val2');
+            const calcbtn = document.querySelector('#calc');
+            const operator = document.querySelector('#operator');
+            const spanEl = document.querySelector('#result');
+            calcbtn.addEventListener('click', function(){
+                let arithmetic = operator.value;
+                // if(isNaN(val1)===true) {
+                //     alert("숫자를 입력하세요");
+                //     return;
+                // } else if(isNaN(val2)===true){
+                //     alert("숫자를 입력하세요");
+                //     return;
+                // }
+                const val1 = parseInt(val1El.value);
+                const val2 = parseInt(val2El.value);
+                let result = val1+val2;
+                
+                if(arithmetic==='-') result=val1-val2;
+                else if(arithmetic==='*'){
+                    result=val1*val2;
+                }else if(arithmetic==='/'){
+                    result=val1/val2;
+                }
+                spanEl.innerHTML=result;
+            })
+        }
+    </script>
+</head>
+<body>
+    <h1>사칙연산 계산기</h1>
+    <input type="text" id="val1">
+    <select id="operator">
+        <option disabled selected>연산을 선택하세요</option>
+        <option>+</option>
+        <option>-</option>
+        <option>*</option>
+        <option>/</option>
+    </select>
+    <input type="text" id="val2">=<span id="result">...</span>
+    <hr>
+    <button id="calc">계산하기</button>
+</body>
+</html>
