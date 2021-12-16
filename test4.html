@@ -11,10 +11,13 @@
     <p>const scores = [75,80,65,55,60,85,90,100,70,50,85,92];</p>
 
     <script>
-        let sum=0, min=100, max=0;
+        let sum=0, min=100, max=0, top2=0;
         const scores = [75,80,65,55,60,85,90,100,70,50,85,92];
         for(const score of scores){
+            // if(score>max) max=score;   버그발생
             if(score>max) max=score;
+            else if(score>top2) top2=score;
+
             if(score<min) min=score;
             if(score) sum+=score;
         }
