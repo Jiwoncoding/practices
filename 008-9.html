@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>jQuery로 갈아타기</title>
+    <script>
+        // window.onload에 해당하는 jQuery 표현
+        // jQuery는 자바스크립트 객체를 가져다가 양념을 해서 좀 더 쫄깃쫄깃하게 만든다
+        //      $(자바스크립트 객체)
+        $(document).ready(function() {
+            // number객체의 값을 읽어와서 출력
+            const input1 = document.querySelector('#number').value;
+            const input2 = $('#number').val();
+
+            // jQuery의 함수는 파라미터가 없으면 읽어오고, 있으면 쓴다
+            document.querySelector('#number').value = '1234';
+            $('#number').val('1234');
+
+            $('#msg').text('우리나라');
+            console.log($('#msg').text());
+        });
+    </script>
+</head>
+<body>
+    <input type="text" id="number" maxlength="10" size="20">
+    <span id='msg'></span>
+</body>
+</html>

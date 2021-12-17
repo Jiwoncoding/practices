@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Document</title>
+    <script>
+        // 알파벳 패턴 8~10자
+        // const regexp = /^[A-Za-z]{8,10}$/;
+
+        // 비밀번호는 대문자,소문자,숫자 8~10자이다
+        // 비밀번호를 입력하고 focusout했을 때 
+        //      입력하지 않은 경우 : "필수입력입니다"
+        //      패턴에 어긋난 경우 : "비밀번호는 영숫자 8~10자입니다"
+        //      정확한 입력인 경우 : "비밀번호 확인이 가능합니다"
+        window.addEventListener('load', function() {
+            const passwordElement = document.querySelector('#password');
+            const spanMsg = document.querySelector('#msg');
+            const regexp = /^[A-Za-z0-9]{8,10}$/;
+            passwordElement.addEventListener('focusout', function() {
+                const input = passwordElement.value;
+                if(input==="") {
+                    spanMsg.innerHTML = "필수입력입니다";
+                    spanMsg.style.color = "red";
+                } else {
+                    const isPatternPass = regexp.test(input);
+                    if(isPatternPass===false) {
+                        spanMsg.innerHTML = "비밀번호는 영숫자 8~10자입니다";
+                        spanMsg.style.color = "red";
+                    } else {
+                        spanMsg.innerHTML = "비밀번호 확인이 가능합니다";
+                        spanMsg.style.color = "blue";
+                    }
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <input type="password" name="" id="password"><br>
+    <span id="msg"></span><br>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // window.addEventListener('load', function() {})
+        // -> window.load(function() {});
+
+        $(document).ready(function() {
+            const value1 = $('#value1');
+            value1.val('우리나라');
+            value1.css('color','red');
+            value1.css('background-color','yellow');
+
+            // 메소드 chaining
+            $('#value2').val('대한민국').css('color','blue').css('background-color','yellow');
+        });
+
+    </script>
+</head>
+<body>
+    <input type="text" name="" id="value1">
+    <input type="text" name="" id="value2">
+</body>
+</html>
