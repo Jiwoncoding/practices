@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Document</title>
+    <script>
+        // 합계를 구한다. 언제? 버튼을 클릭하면 
+        // 이벤트소스: 버튼, 이벤트이름: 클릭, 이벤트핸들러: 합계를 구해 출력
+
+        // 합계를 구한다. 언제? 엔터치면
+        // 이벤트소스:#num, 이벤트이름: keyup, 이벤트핸들러 : 합계를 구해 출력
+
+        function sum() {
+            let sum = 0;
+            const num = parseInt($('#num').val());
+            if(isNaN(num)===true) {
+                return false;
+            }
+            for(let i=1;i<=num;i++) {
+                sum+=i;
+            }
+            return sum;
+        }
+        $(document).ready(function() {
+            $("#print").click(function() {
+                const result = sum();
+                if(result===false) {
+                    alert('숫자를 입력하세요');
+                    $('#num').val('');
+                    $('#result').text('');
+                } else {
+                    $('#result').text(result);
+                }
+            });
+            $("#num").keyup(function(e) {
+                // 입력한 키보드의 키코드를 읽어온다
+                // 예를 들어 A->65가 읽힌다
+                if(e.keyCode===13) {
+                    const result = sum();
+                    if(result===false) {
+                        alert('숫자를 입력하세요');
+                        $('#num').val('');
+                        $('#result').text('');
+                    } else {
+                        $('#result').text(result);
+                    } 
+                }
+            })
+        });
+    </script>
+</head>
+<body>
+    <!-- 버튼을 눌러도 합계 출력, 숫자 입력하고 엔터쳐도 합계 출력-->
+    <input type="text" id="num">
+    <button id="print">출력</button>
+    <div>합 계 : <span id="result"></span></div>
+</body>
+</html>

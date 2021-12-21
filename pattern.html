@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Document</title>
+    <script>
+        // 예를 들어 비밀번호는 알파벳 대문자, 소문자, 숫자로 구성된다
+        // 비밀번호의 길이는 10~16글자다
+
+        // 정규식 : 문자열 패턴을 검증하는 기술
+        const pattern = /^[A-Za-z0-9]{10,16}$/;
+        function check() {
+            const password = $('#password').val();
+            if(password==='') {
+                alert("비밀번호를 입력하세요");
+            } else {
+                if(pattern.test(password)===false) {
+                    alert("비밀번호는 영숫자 10~16자입니다");
+                } else {
+                    alert("비밀번호를 확인하겠습니다");
+                }
+            }
+        }
+        $(document).ready(function() {
+            $('#check').click(function() {
+                check();
+            });
+            $('#password').keyup(function(e) {
+                if(e.keyCode===13) {
+                    check();
+                }
+            })
+        });
+
+    </script>
+</head>
+<body>
+    <h1>비밀번호 확인하기</h1>
+    <label for="password">비밀번호</label>
+    <input type="password" id="password">
+    <button id="check">비밀번호 확인</button>
+</body>
+</html>

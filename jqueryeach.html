@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>반복문</title>
+    <script>
+        // ES6의 of 반복문
+        $(document).ready(function(){
+            const $lis = $('li');
+            for(const li of $lis) {
+                console.log(li);
+            }
+        });
+    
+        // jQuery each 반복문 - 파라미터로 익명함수
+        $(document).ready(function() {
+            const $lis = $('li');
+            // jQuery 객체에서만 사용가능
+            $lis.each(function(index, item) {
+                console.log(index);
+                console.log(item);
+            })
+        });
+
+        // jQuery each 반복문
+        $(document).ready(function() {
+            const $lis = $('li');
+            // $.each(집합, function(idx, 원소))
+            // jQuery, js 객체 모두 사용가능한 반복문
+            $.each($li, function(index, item) {
+
+            });
+        });
+    </script>
+</head>
+<body>
+    <ul>
+        <li>우리나라</li>
+        <li>좋은나라</li>
+        <li>정말???</li>
+    </ul>
+</body>
+</html>
