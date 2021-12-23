@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Document</title>
+    <script>
+        // 001.jpg ~ 006.jpg;
+        let imageNumber = 1;
+
+        $(document).ready(function() {
+            const $slider = $('#slider');
+            $('#prev').click(function() {
+                imageNumber--;
+                if(imageNumber<1) {
+                    imageNumber=6;
+                }
+                $slider.attr('src', 'image/00' + imageNumber + '.jpg');
+            });
+            $('#next').click(function() {
+                imageNumber++;
+                if(imageNumber>6) {
+                    imageNumber=1;
+                }
+                $slider.attr('src', 'image/00' + imageNumber + '.jpg');
+            });
+        });
+    </script>
+</head>
+<body>
+    <img id='slider' src="image/001.jpg">
+    <hr>
+    <button id='prev'>이전으로</button>
+    <button id='next'>다음으로</button>
+</body>
+</html>

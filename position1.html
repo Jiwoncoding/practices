@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>position 속성</title>
+    <style>
+        div {
+            width: 100px; height: 100px; text-align: center; line-height: 100px;
+        }
+        #b { position: relative; top:20px; left:200px; background-color: aqua;} 
+        #d { position: absolute; top:20px; left:20px; background-color: brown;}
+        #f { position: fixed; bottom:10px; right:10px;}
+    </style>
+</head>
+<body>
+    <!--
+        position : static   relative    absolute    fixed
+        요소들은 position 기본값은 static(위->아래, 좌->우)
+        나머지 3가지는 위치를 지정
+        fixed : 특정 위치에 고정
+        relative : 요소의 원위치를 기준으로 이동. 원위치 공간은 그대로 유지된다
+        absolute : 부모요소(relative/absolute) 기준으로 이동. 그런 부모가 없으면 화면 좌상단 기준으로 이동
+                   원 위치 공간은 다른 요소로 채워진다
+    -->
+    <div style="border:1px solid red;">A</div>
+    <div id='b' style="border:1px solid green;">B</div>
+    <div style="border:1px solid blue;">C</div>
+    <div id='d' style="border:1px solid pink;">D</div>
+    <div style="border:1px solid violet;">E</div>
+    <div id='f'>F</div>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</body>
+</html>
