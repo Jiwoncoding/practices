@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Document</title>
+    <script>
+        const list = [
+            {no:5, title:'취업 고민', writer:'spring', read:11},
+            {no:4, title:'메이플 스토리', writer:'summer', read:21},
+            {no:3, title:'루키', writer:'spring', read:15},
+            {no:2, title:'산업의 과제', writer:'winter', read:30}, 
+            {no:1, title:'민폐 영상', writer:'winter', read:22}
+        ];
+        $(document).ready(function() {
+            const $list = $('#list');
+            for(board of list) {
+                const $tr = $('<tr>').appendTo($list);
+                $('<td>').text(board.no).appendTo($tr);
+                const $td = $('<td>').appendTo($tr);
+                $('<a>').attr('href','#').text(board.title).appendTo($td);
+                $('<td>').text(board.writer).appendTo($tr);
+                $('<td>').text(board.read).appendTo($tr);
+            }
+        });
+    </script>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>번호</th>
+                <th>제목</th>
+                <th>글쓴이</th>
+                <th>조회수</th>
+            </tr>
+        </thead>
+        <tbody id='list'>
+        </tbody>
+    </table>
+</body>
+</html>

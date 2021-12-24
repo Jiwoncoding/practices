@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Document</title>
+    <style>
+        .em { color: red; }
+        .border { border: 1px solid blue; }
+        .underline { text-decoration: underline;}
+    </style>
+    <script>
+        $(document).ready(function() {
+            $('#em').click(function() {
+                $('#target').addClass('em');
+            });
+            $('#border').click(function() {
+                $('#target').addClass('border');
+            });
+            $('#underline').click(function() {
+                $('#target').addClass('underline');
+            });
+        });
+    </script>
+</head>
+<body>
+    <p class="em border underline">우리나라 좋은나라</p>
+    <p id='target'>너네나라 좋은나라</p>
+    <button id='em'>em</button>
+    <button id='border'>border</button>
+    <button id='underline'>underline</button>
+</body>
+</html>

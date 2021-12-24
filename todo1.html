@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #app {
+            width: 600px;
+            margin: 0 auto;
+        }
+        #add {
+            width: 12%;
+        }
+        #task {
+            width: 80%;
+            display: inline-block;
+        }
+        #todo_table {
+            width: 600px;
+        }
+        .done {
+            text-decoration: line-through;
+            background-color: skyblue;
+        }
+    </style>
+    <script>
+        const todolist = [
+            { job : "영화보기", done:false },
+            { job : "주말 산책", done:true },
+            { job : "ES6 학습", done:false },
+            { job : "잠실 야구장", done:false }
+        ];
+
+        
+        let $tbody = undefined;
+
+        function addTodo(task) {
+            const todo = {job: task, done:false};
+            todolist.push(todo);
+            printTodoList();
+        }
+
+        function printTodoList() {
+            $tbody.empty();
+            $.each(todolist, function(idx, todo) {
+                const $tr = $('<tr>').appendTo($tbody);
+                $('<td>').attr('class','job').text(todo.job).attr("data-idx", idx).appendTo($tr);
+                if(todo.done==true) {
+                    const $td = $("<td>").text("(완료)").appendTo($tr);
+                    $td.prev().addClass('done');
+                    $td.addClass('done');
+                } else {
+                    const $td = $("<td>").text("").appendTo($tr);
+                    $td.prev().removeClass('done');
+                    $td.removeClass('done');
+                }
+                $("<td>").attr("class", "close").text("X").appendTo($tr);
+            });
+        }
+
+        $(document).ready(function() {
+            $tbody = $('#list');
+            printTodoList();
+            
+            $("#task").keyup(function(e) {
+                if($('#task').val()==="") {
+                    alert("할일은 필수입력입니다");
+                    return;
+                }
+                if(e.keyCode==13) {
+                    addTodo($("#task").val());
+                    $("#task").val('');
+                    printTodoList();
+                }
+            });
+            $("#add").click(function() {
+                if($('#task').val()==="") {
+                    alert("할일은 필수입력입니다");
+                    return;
+                }
+                addTodo($("#task").val());
+                $("#task").val('');
+                printTodoList();
+            });
+
+            $("#todo_table").on("click", ".job", function() {
+                todolist[$(this).data("idx")].done = !todolist[$(this).data("idx")].done;
+                printTodoList();
+            });
+
+            $("#todo_table").on("click", ".close", function() {
+                todolist.splice($(this).data("idx"), 1);
+                printTodoList();
+            });
+        })
+    </script>
+</head>
+<body>
+    <div id="app">
+        <div class="form-group">
+            <input type="text" class="form-control"  id="task" placeholder="할 일 입력 후 엔터!">
+            <button type="button" class="btn btn-primary" id='add'>추가</button>
+        </div>
+        <table id='todo_table'>
+            <thead>
+                <tr>
+                    <th>할 일</th><th>상태</th><th></th>
+                </tr>
+            </thead>
+            <tbody id='list'>
+
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

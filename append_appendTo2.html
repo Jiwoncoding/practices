@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>append과 appendTo의 차이 2</title>
+    <script>
+        $(document).ready(function() {
+            // 부모.append(자식)의 결과는 부모
+            const $a = $('#a');
+            const result1 = $a.append('<li>부모</li>');
+            console.log(result1[0]);
+
+            // 자식.appendTo(부모)의 결과는 자식
+            const $b = $('#b');
+            const result2 = $('<li>자식</li>').appendTo($('#b'));
+            console.log(result2[0]);
+        })
+    </script>
+</head>
+<body>
+    <ul id='a'></ul>
+
+    <ol id='b'></ol>
+</body>
+</html>

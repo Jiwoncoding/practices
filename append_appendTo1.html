@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>append와 appendTo 1</title>
+    <script>
+        // 결론은 appendTo를 쓰자
+        // 역할은 동일. 부모 element에 자식을 뒤로 붙인다
+        // 부모.append(자식)
+        // 자식.appendTo(부모)
+        $(document).ready(function() {
+            const $a = $('#a');
+            const $b = $('#b');
+
+            $a.append('<li>우리나라</li>');
+            
+            // $()에 html 태그를 적으면 그 요소를 만든다
+            const $li = $('<li>');
+            $li.append('<a href="#">좋은나라</a>');
+            $a.append($li);
+
+            $a.append($('<li>').text('정말??'));
+
+            $b.append('<li id="hello" class="red" name="hello">우리나라</li>');
+            $b.append($('<li>').text('좋은나라').attr('id','hello').attr('class','red').attr('name','hello'));
+            $b.append($('<li id="hello">정말??</li>').attr('class','red').attr('name','hello'));
+        });
+    </script>
+</head>
+<body>
+    <ul id='a'>
+    </ul>
+
+    <ol id='b'>
+
+    </ol>
+</body>
+</html>
