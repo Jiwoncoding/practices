@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #app {
+            width: 600px;
+            margin: 0 auto;
+        }
+        #add {
+            width: 12%;
+        }
+        #task_day {
+            width: 80%;
+            display: inline-block;
+        }
+        #todo_table {
+            width: 600px;
+        }
+        .done {
+            text-decoration: line-through;
+            background-color: skyblue;
+        }
+    </style>
+    <script>
+        const todolist = [
+            {job : "영화보기", done:false, date:new Date(2021,11,25)},
+            {job : "주말 산책", done:true, date:new Date(2021,11,26) },
+        ];
+        
+        let $tbody = undefined;
+
+        function addTodo(task, taskDay) {
+            const todo = {job: task, done:false, date:new Date(taskDay.substr(0,4), taskDay.substr(5,2)-1, taskDay.substr(8,2))};
+            //console.log(taskDay);
+            //console.log(taskDay.substr(0,4))                  // 년도
+            //console.log(taskDay.substr(5,2))                  // 월
+            //console.log(taskDay.substr(8,2))                  // 일
+            todolist.push(todo);
+            printTodoList();
+        }
+
+        function printTodoList() {
+            $tbody.empty();
+            $.each(todolist, function(idx, todo) {
+                const $tr = $('<tr>').appendTo($tbody);
+                $('<td>').attr('class','job').text(todo.job).attr("data-idx", idx).appendTo($tr);
+                if(todo.done==true) {
+                    const $td = $("<td>").text("(완료)").appendTo($tr);
+                    $td.prev().addClass('done');
+                    $td.addClass('done');
+                } else {
+                    const $td = $("<td>").text("").appendTo($tr);
+                    $td.prev().removeClass('done');
+                    $td.removeClass('done');
+                }
+                $("<td>").text(todo.date.toLocaleDateString()).appendTo($tr);
+                $("<td>").attr("class", "close").text("X").appendTo($tr);
+            });
+        }
+
+        $(document).ready(function() {
+            $tbody = $('#list');
+            const pattern = /[0-9]{4}-[0-9]{2}-[0-9]{2}/;
+            printTodoList();
+            
+            $("#task").keyup(function(e) {
+                if($('#task').val()==="") {
+                    alert("할일은 필수입력입니다");
+                    return;
+                    if(pattern.test($('#task_day').val())===false) {
+                       alert("날짜는 필수입력입니다");
+                        return;
+                    }
+                }
+                if(e.keyCode==13) {
+                    addTodo($("#task").val(), $('#task_day').val());
+                    $("#task").val('');
+                    printTodoList();
+                }
+            });
+
+            $("#add").click(function() {
+                if($('#task').val()==="") {
+                    alert("할일은 필수입력입니다");
+                    return;
+                }
+                if(pattern.test($('#task_day').val())===false) {
+                    alert("날짜는 필수입력입니다");
+                    return;
+                }
+                addTodo($("#task").val(), $('#task_day').val());
+                $("#task").val('');
+                printTodoList();
+            });
+
+            $("#todo_table").on("click", ".job", function() {
+                todolist[$(this).data("idx")].done = !todolist[$(this).data("idx")].done;
+                printTodoList();
+            });
+
+            $("#todo_table").on("click", ".close", function() {
+                todolist.splice($(this).data("idx"), 1);
+                printTodoList();
+            });
+        })
+    </script>
+</head>
+<body>
+    <div id="app">
+        <div class="form-group">
+            <input type="text" class="form-control"  id="task" placeholder="할 일을 입력하세요">
+        </div>
+        <div class="form-group">
+            <input type="date" class="form-control"  id="task_day">
+            <button type="button" class="btn btn-primary" id='add'>추가</button>
+        </div>
+        <table id='todo_table'>
+            <thead>
+                <tr>
+                    <th>할 일</th><th>상태</th><th>날짜</th><th></th>
+                </tr>
+            </thead>
+            <tbody id='list'>
+
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
