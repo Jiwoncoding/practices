@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>8번 다시 한번 + 다듬기</title>
+    <script>
+        let addressBook = [];
+        let sequence = 0;
+        let $ul = undefined;
+
+        function printAddressBook() {
+            // #list 내부의 lis들을 모두 삭제
+            $ul.empty();
+            for(a of addressBook) {
+                const $li = $('<li>').text(a.ano + ". " + a.irum + " : " + a.tel).appendTo($ul);
+                $('<button>').attr('class','delete').text('삭제').attr('data-ano',a.ano).appendTo($li);
+            }
+        }
+
+        $(document).ready(function() {
+            $ul = $('#list');
+            // app을 실행하면 addressBook, sequence를 localStorage에서 읽어온다
+            // localStorage의 경우 키가 존재하지 않으면 값은 null
+            if(localStorage.getItem('addressBook')!=null) {
+                addressBook = JSON.parse(localStorage.getItem('addressBook'));
+                sequence = parseInt(JSON.parse(localStorage.getItem('sequence')));
+                printAddressBook();
+            }
+            
+            $('#add').click(function() {
+                // 입력한 내용을 객체로 생성한다. ano는 1씩 증가하는 시퀀스로 처리
+                const a = {
+                    ano: sequence++,
+                    irum: $('#irum').val(),
+                    tel: $('#tel').val()
+                };
+
+                // a와 sequence를 localStorage에 저장한 다음 화면을 갱신
+                addressBook.push(a);
+                localStorage.setItem('addressBook', JSON.stringify(addressBook));
+                localStorage.setItem('sequence', sequence);
+                printAddressBook();
+                $('#irum').val("");
+                $('#tel').val("");
+            });
+
+            $('#list').on('click', '.delete', function() {
+                // 버튼에 저장된 address번호를 읽어온다
+                const $ano = parseInt($(this).attr('data-ano'));
+
+                // addressNo배열의 모든 원소(각 i번째 원소)의 ano와 사용자가 선택한 버튼의 ano($ano)를 
+                // 비교해 일치하면 원소를 삭제
+                for(let i=0; i<addressBook.length; i++) {
+                    if(addressBook[i].ano===$ano) {
+                        addressBook.splice(i, 1);
+                    }
+                }
+                localStorage.setItem('addressBook', JSON.stringify(addressBook));
+                localStorage.setItem('sequence', sequence);
+                printAddressBook();
+            });
+           
+        });
+    </script>
+</head>
+<body>
+    이름 : <input type="text" name="" id="irum"><br>
+    연락처 : <input type="text" name="" id="tel"><br>
+    <button id='add'>추가</button>
+    <hr>
+    <ul id='list'>
+    </ul>
+</body>
+</html>

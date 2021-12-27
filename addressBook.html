@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>주소록</title>
+    <script>
+        let addressBook = [];
+        let $ul = undefined;
+
+        function printAddressBook() {
+            $ul = $('#list');
+            const jsonString = localStorage.getItem('addressBook');
+
+            // localStorage에 주소가 안들어있는 경우 jsonString은 null
+            // 아래쪽에서 of 돌릴 때 오류 발생
+            if(jsonString==null) {
+                return;
+            }
+            addressBook = JSON.parse(jsonString);
+            $ul.empty();
+            for(address of addressBook) {
+                const $li = $('<li>').text(address.addressNo + ". " + address.irum + " : " + address.tel).appendTo($ul);
+                $('<button>').attr('class','delete').text('삭제')
+                    .attr('data-no', address.addressNo).appendTo($li);
+            } 
+        }
+
+        $(document).ready(function() {
+            printAddressBook();
+            
+            // localStorage 초기화
+            localStorage.clear();
+
+            $('#add').click(function() {
+                const address = {
+                    // 삭제할 때 addressNo 기준으로 삭제 -> 작업의 중심이 되는 속성을 기본키
+                    // 기본키는 절대 겹치면 안된다. 대충 만들다보면 지금처럼 겹쳐서 문제가 발생
+                    addressNo : addressBook.length,
+                    irum: $('#irum').val(),
+                    tel: $('#tel').val()
+                };
+                addressBook.push(address);
+                const jsonString = JSON.stringify(addressBook);
+                localStorage.setItem('addressBook', jsonString);
+                printAddressBook();
+                $('#irum').val("");
+                $('#tel').val("");
+            });
+
+            $('#list').on('click', '.delete', function() {
+                // attr로 data- 속성을 읽어오면 문자열
+                const deleteAddressNo = parseInt($(this).attr('data-no'));
+                addressBook.splice(deleteAddressNo, 1);
+                const jsonString = JSON.stringify(addressBook);
+                localStorage.setItem('addressBook', jsonString);
+                printAddressBook();
+            });
+        });
+    </script>
+</head>
+<body>
+    이름 : <input type="text" name="" id="irum"><br>
+    연락처 : <input type="text" name="" id="tel"><br>
+    <button id='add'>추가</button>
+    <hr>
+    <ul id='list'>
+    </ul>
+</body>
+</html>
