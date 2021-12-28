@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="main.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Document</title>
+    <script>
+        // read.html?index=21
+        // read.html?index=3547
+
+        // indexOf는 문자열에서 문자의 위치를 찾는다. 못 찾으면 -1
+        let querystring = location.search;
+
+        //  substr(위치, 너비) : 위치에서 너비만큼 잘라라 -> 너비를 생략하면 끝까지 잘라낸다
+        // querystring이 없을 경우 indexOfEqual는 -1이 된다
+        let indexOfEqual = querystring.indexOf('=');
+        if(indexOfEqual===-1) {
+            alert("올바르지 않은 접근경로입니다1");
+            location.href = "list.html";
+        }
+            
+        let index = parseInt(querystring.substr(indexOfEqual+1));
+
+        $(document).ready(function() {
+            const diaries = JSON.parse(localStorage.getItem('diaries'));
+            let diary = undefined;
+            $.each(diaries, function(idx, d) {
+                if(d.index===index) {
+                    diary = d;
+                    // each문을 빠져나올 때는 return false;
+                    return false;
+                }
+            });
+
+            if(diary===undefined) {
+                alert("올바르지 않은 접근경로입니다2");
+                location.href = "list.html";
+            } else {
+                $('#day').val(diary.day);
+                $('#title').val(diary.title);
+                $('#content').val(diary.content);
+            }
+        });
+    </script>
+</head>
+<body>
+    <div id='page'>
+        <div class="form-group">
+            <label for="day">날짜:</label>
+            <input type="date" class="form-control" id="day" readonly>
+        </div>
+        <div class="form-group">
+            <label for="title">일기 제목:</label>
+            <input type="text" class="form-control" id="title" readonly>
+        </div>
+        <div class="form-group">
+            <label for="content">내용:</label>
+            <textarea class="form-control" rows="10" id="content" readonly></textarea>
+        </div>
+        <a href="list.html" class='btn btn-warning'>HOME</a>
+    </div>
+</body>
+</html>
