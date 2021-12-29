@@ -1,8 +1,39 @@
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box;
+}
+
 #page { 
-    width: 800px;
+    width: 800px; 
     margin: 0 auto;
 }
 
-.full {
-    width: 100%;
+#main { 
+    overflow: hidden;
+}
+
+section { 
+    width: 600px; 
+    float: left; 
+    min-height: 600px;
+}
+
+aside { 
+    width: 200px; 
+    background-color: green; 
+    float:right; 
+    height:400px;
+}
+
+#nav { 
+    margin-bottom: 5px;
+}
+
+header h1 { 
+    text-align: center;
+}
+
+footer { 
+    text-align: center;
 }

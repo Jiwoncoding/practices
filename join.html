@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="main.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script>
+        // 로그인했다면 list.html로 보내버리자
+        if(sessionStorage.getItem('username')!=null) {
+            location.href = "list.html";
+        }
+
+        $(document).ready(function() {
+            // 로그인했으면 13라인에의해 list.html로 이동
+            // 즉 여기가 실행됐다는 말은 현재 비로그인
+            $('.nav li').css('display','none');
+            $('#join').css('display','inline-block');
+            $('#login').css('display','inline-block');
+
+            $('#join').click(function() {
+                const username = $('#username').val();
+                const password = $('#password').val();
+
+                localStorage.setItem('username', username);
+                localStorage.setItem('password', password);
+
+                location.href = "login.html";
+            });
+        })
+    </script>
+    <title>Document</title>
+</head>
+<body>
+    <div id='page'>
+        <header>
+            <h1>My Diary</h1>
+        </header>
+        <nav id='nav' class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="list.html">MyDiary</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li id="join"><a href="join.html">회원가입</a></li>
+                    <li id="login"><a href="login.html">로그인</a></li>
+                    <li id="write"><a href="write.html">글쓰기</a></li>
+                    <li id='logout'><a href="#">로그아웃</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div id="main">
+            <section>
+                <h1>회원 가입</h1>
+                아이디 : <input type="text" id="username"><br>
+                비밀번호 : <input type="password" id="password"><br>
+                <button id='join'>회원 가입</button>
+            </section>
+            <aside>광고</aside>
+        </div>
+        <footer>copyright &copy2021 ICIA all right reserved</footer>
+    </div>
+</body>
+</html>

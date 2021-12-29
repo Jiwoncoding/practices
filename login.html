@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="main.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script>
+        // 1. 로그인 상태라면 루트 페이지로 이동
+        if(sessionStorage.getItem('username')!=null) {
+            location.href = "list.html";
+        }
+
+        // 2. 로그인하지 않았다면 - 로그인에 실패 후 이동한 경우 오류 메시지 
+        let querystring = location.search.substr(1);
+        if(querystring==='error') {
+            alert("로그인에 실패했습니다");
+        }
+
+        $(document).ready(function() {
+            $('#login').click(function() {
+                // 사용자가 입력한 아이디와 비밀번호
+                const $inputUsername = $('#username').val();
+                const $inputPassword = $('#password').val();
+
+                // 회원가입한 아이디와 비밀번호
+                const username = localStorage.getItem('username');
+                const password = localStorage.getItem('password');
+
+                if(username===$inputUsername && password===$inputPassword) {
+                    // 로그인 성공 - sessionStorage는 브라우저를 닫으면 사라진다
+                    sessionStorage.setItem('username', username);
+                    location.href = "list.html";
+                } else {
+                    // 로그인 실패
+                    location.href = "login.html?error";
+                }
+            });
+        })
+    </script>
+    <title>Document</title>
+</head>
+<body>
+    <div id='page'>
+        <header>
+            <h1>My Diary</h1>
+        </header>
+        <nav id='nav' class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="list.html">MyDiary</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="join.html">회원가입</a></li>
+                    <li><a href="login.html">로그인</a></li>
+                    <li><a href="write.html">글쓰기</a></li>
+                    <li><a href="#" id='logout'>로그아웃</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div id="main">
+            <h1>로그인</h1>
+            <section>
+                아이디 : <input type="text" id="username"><br>
+                비밀번호 : <input type="password" id="password"><br>
+                <button id='login'>로그인</button>
+            </section>
+            <aside>광고</aside>
+        </div>
+        <footer>copyright &copy2021 ICIA all right reserved</footer>
+    </div>
+</body>
+</html>

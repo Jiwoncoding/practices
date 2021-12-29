@@ -8,38 +8,34 @@
     <link rel="stylesheet" href="main.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src='auth.js'></script>
     <title>Document</title>
-    <script>
-        // localStorage에서 diaries를 읽어와 table에 추가한다
-        // 내용이 없다면? for문이 안돈다
-        $(document).ready(function() {
-            const diaries = JSON.parse(localStorage.getItem('diaries'));
-            const $list = $('#list');
-            $.each(diaries, function(idx, diary) {
-                const $tr = $('<tr>').appendTo($list);
-                $('<td>').text(diary.index).appendTo($tr);
-                $('<td>').text(diary.day).attr('class','day').attr('data-index', diary.index).appendTo($tr);
-                const $td = $('<td>').appendTo($tr);
-                $('<a>').attr('href','read.html?index='+diary.index).text(diary.title).appendTo($td);
-            });
-            
-            // 날짜를 클릭해도 read.html로 넘어가도록 하자. 단 여기는 data-로 처리하자
-            $('#list').on('click', '.day', function() {
-                location.href = 'read.html?index=' + $(this).attr('data-index');
-            });
-        });
-    </script>
 </head>
 <body>
-    <div id="page">`
-        <table class='table table-hover'>
-            <thead>
-                <tr><th>번호</th><th>날짜</th><th>제목</th></tr>
-            </thead>
-            <tbody id='list'>
-            </tbody>
-        </table>
-        <a id='add' class='btn btn-primary' href='write.html'>일기쓰기</a>
+    <div id='page'>
+        <header>
+            <h1>My Diary</h1>
+        </header>
+        <nav id='nav' class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="list.html">MyDiary</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="join.html">회원가입</a></li>
+                    <li><a href="login.html">로그인</a></li>
+                    <li><a href="write.html">글쓰기</a></li>
+                    <li><a href="#" id='logout'>로그아웃</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div id="main">
+            <section>
+                어서오세요
+            </section>
+            <aside>광고</aside>
+        </div>
+        <footer>copyright &copy2021 ICIA all right reserved</footer>
     </div>
 </body>
 </html>
