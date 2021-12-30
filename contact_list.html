@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        const params = {
+            pageno: 1,
+            pagesize: 10
+        };
+
+        function showList(contacts) {
+            const $list = $('#list');
+            $list.empty();
+            $.each(contacts, function(idx, contact) {
+                // 번호, 사진, 이름, 전화번호
+                const $outer_div = $('<div class="contact">').appendTo($list);
+                $('<div>').text(contact.no).appendTo($outer_div)
+
+                const $inner_div = $('<div>').appendTo($outer_div);
+                const $link = $('<a>').attr('href','read.html?no='+contact.no).appendTo($inner_div);
+                const $photo = $('<img class="photo">').attr('src', contact.photo)
+                    .attr('alt',contact.name).appendTo($link);
+                           
+                $('<div>').text(contact.name).appendTo($outer_div);
+                $('<div>').text(contact.tel).appendTo($outer_div);
+            })
+        }
+
+        function printPage() {
+            $.ajax({
+                url: 'http://sample.bmaster.kro.kr/contacts',
+                method: 'get',
+                //data: 'pageno=' + pageno + "&pagesize=" + pagesize,
+                data: params,
+                success:function(result) {
+                    showList(result.contacts);
+                }
+            });
+        }
+
+        $(document).ready(function() {
+            // js 객체를 만들어서  $.ajax의 data에 넘겨주면 $.ajax가 urlencoded 형식으로 변환
+            // 이 설정이 processData가 기본값은 true
+            // 파일 업로드를 하거나(multipart/form-data) 또는 json(application/json)일 경우
+            //      processData:false로 꺼줘야 한다
+
+            printPage();
+
+            $(".btn_page").click(function() {
+                params.pageno = $(this).text();
+                printPage();
+            })
+        });
+    </script>
+    <style>
+        #page { width: 1000px; margin: 0 auto;}
+        .contact { display: inline-block; width: 198px; border: 1px solid red; text-align: center;}
+        #btn_div { width: 500px; margin: 0 auto; text-align: center;}
+        .photo { width: 128px; height:128px;}
+    </style>
+</head>
+<body>
+    <div id="page">
+        <div id="list">
+
+        </div>
+        <div id="btn_div">
+            <button class='btn_page'>1</button>
+            <button class='btn_page'>2</button>
+            <button class='btn_page'>3</button>
+            <button class='btn_page'>4</button>
+            <button class='btn_page'>5</button>
+        </div>
+    </div>
+</body>
+</html>

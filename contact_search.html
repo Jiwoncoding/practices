@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Document</title>
+    <style>
+        #page { width: 1000px; margin: 0 auto;}
+        .contact { display: inline-block; width: 198px; border: 1px solid red; text-align: center;}
+        #search_div { width: 500px; margin: 0 auto; text-align: center;}
+        .photo { width: 128px; height:128px;}
+    </style>
+    <script>
+        // list.html과 공통 코드. 유일하게 다른 부분이 result.contacts를 뿌리느냐 result를 뿌리느냐
+        function showList(contacts) {
+            const $list = $('#list');
+            $list.empty();
+            $.each(contacts, function(idx, contact) {
+                // 번호, 사진, 이름, 전화번호
+                const $outer_div = $('<div class="contact">').appendTo($list);
+                $('<div>').text(contact.no).appendTo($outer_div)
+
+                const $inner_div = $('<div>').appendTo($outer_div);
+                const $link = $('<a>').attr('href','read.html?no='+contact.no).appendTo($inner_div);
+                const $photo = $('<img class="photo">').attr('src', contact.photo)
+                    .attr('alt',contact.name).appendTo($link);
+                           
+                $('<div>').text(contact.name).appendTo($outer_div);
+                $('<div>').text(contact.tel).appendTo($outer_div);
+            })
+        }
+
+        function printPage($name) {
+            $.ajax({
+                url: 'http://sample.bmaster.kro.kr/contacts/search/' + $name,
+                method: 'get',
+                success:function(result) {
+                    showList(result);
+                }
+            });
+        }
+
+        $(document).ready(function() {
+            $('#search').click(function() {
+                const pattern = /^[A-Za-z]{2,}$/;
+                const $name = $('#name').val();
+                if($name==="") {
+                    $('#name').focus();
+                    return false;
+                } else if(pattern.test($name)===false) {
+                    $('#name').val('');
+                    $('#name').focus();
+                    return false;
+                }
+                printPage($name);
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="page">
+        <div id="search_div">
+            <input type='text' id='name' placeholder="이름을 영문 2글자 이상 입력"><button id='search'>검색</button>
+        </div>
+        <div id="list">
+
+        </div>
+    </div>
+</body>
+</html>
