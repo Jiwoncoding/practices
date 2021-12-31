@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Document</title>
+    <script>
+        $(document).ready(function() {
+            const $forms = $('.my_form');
+            const ar  = [];
+            $.each($forms, function(idx, form) {
+                const param = {
+                    name: $(form).find('.name').val(),
+                    tel: $(form).find('.tel').val(),
+                    address: $(form).find('.address').val() 
+                };
+                console.log(param);
+                ar.push(param);
+            });
+            console.log("=== 주소록 객체 배열을 json으로 출력");
+            console.log(JSON.stringify(ar));
+        })
+    </script>
+</head>
+<body>
+    <!--
+        [ 
+            { "name":"오바마", "tel":"010-2222-3339", "address":"서울시" }, 
+            { "name":"샌더스", "tel":"010-2222-3332", "address":"서울시" },
+            { "name":"트럼프", "tel":"010-2222-3333", "address":"서울시" }
+        ]
+    -->
+    <form class='my_form'>
+        <input type="text" name="name" class="name" value='오바마'>
+        <input type="text" name="tel" class="tel" value="111">
+        <input type="text" name="address" class="address" value="서울시">
+    </form>
+    <form class='my_form'>
+        <input type="text" name="name" class="name" value="샌더스">
+        <input type="text" name="tel" class="tel" value="2222">
+        <input type="text" name="address" class="address" value='인천시'>
+    </form>
+    <form class='my_form'>
+        <input type="text" name="name" class="name" value="트럼프">
+        <input type="text" name="tel" class="tel" value="3333">
+        <input type="text" name="address" class="address" value="광주시">
+    </form>
+</body>
+</html>

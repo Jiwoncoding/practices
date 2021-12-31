@@ -1,41 +1,83 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="main.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <script src='auth.js'></script>
     <title>Document</title>
+    <script>
+        function printContacts(contacts) {
+            const $list = $('#list');
+            $list.empty();
+            $.each(contacts, function(idx, contact) {
+                const $tr = $('<tr>').appendTo($list);
+                $("<td>").text(contact.no).appendTo($tr);
+                const $td = $("<td>").appendTo($tr);
+                $('<a>').attr('href','read.html?no='+contact.no).text(contact.name).appendTo($td);
+                $("<td>").text(contact.address).appendTo($tr);
+                $("<td>").text(contact.tel).appendTo($tr);
+            });
+        }
+
+        function init() {
+            // #nav에 nav.html을 읽어서 출력(정적인 ajax)
+            $('#nav').load('nav.html');
+            // data를 넘기지 않는 get방식 요청은 url 속성 이름까지 생략해서 아래처럼 적을 수 있다
+            $.ajax('http://sample.bmaster.kro.kr/contacts').done((r)=>{ printContacts(r.contacts); });
+        }
+
+        function searchAndPrint() {
+            const $keyword = $(this).val();
+            if($keyword.length<2) {
+                $.ajax('http://sample.bmaster.kro.kr/contacts').done((r)=>{ printContacts(r.contacts); });
+                console.log('------');
+                return;
+            }
+            // /contacts/search/jo
+            // 29라인의 경우 서버의 응답은 pageno, pagesize, totalcount, contacts로 구성된 객체
+            // 아래의 경우 서버의 응답은 contacts 배열
+            $.ajax('http://sample.bmaster.kro.kr/contacts/search/' + $keyword)
+                .done((contacts)=>{ printContacts(contacts); });
+        }
+
+        $(document).ready(function() {
+            init();
+            $('#search').keyup(searchAndPrint);
+        })
+    </script>
 </head>
 <body>
-    <div id='page'>
-        <header>
-            <h1>My Diary</h1>
+    <div id="page">
+        <header id='header'>
+            CONTACTS APP
         </header>
-        <nav id='nav' class="navbar navbar-inverse">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="list.html">MyDiary</a>
-                </div>
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="join.html">회원가입</a></li>
-                    <li><a href="login.html">로그인</a></li>
-                    <li><a href="write.html">글쓰기</a></li>
-                    <li><a href="#" id='logout'>로그아웃</a></li>
-                </ul>
-            </div>
+        <nav class="navbar navbar-inverse" id='nav'>
         </nav>
         <div id="main">
+            <aside id='left'>
+            </aside>
             <section>
-                어서오세요
+                <table class='table'>
+                    <thead>
+                        <th>번호</th><th>이름</th><th>주소</th><th>연락처</th>
+                    </thead>
+                    <tbody id="list">
+                    </tbody>
+                    <div id='search_div'>
+                        <input type='text' id='search' placeholder="이름을 두글자이상 입력하세요">
+                    </div>
+                </table>
             </section>
-            <aside>광고</aside>
+            <aside id='right'>
+            </aside>
         </div>
-        <footer>copyright &copy2021 ICIA all right reserved</footer>
+
+        <footer>
+            copyright &copy; 2021 ICIA
+        </footer>
     </div>
 </body>
 </html>

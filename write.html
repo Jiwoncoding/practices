@@ -4,36 +4,74 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="main.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <script src='auth.js'></script>
     <title>Document</title>
+    <script>
+        // 파일를 업로드하는 경우 js의 FormData 객체를 사용해야 한다
+        // multipart인 <form>을 읽어와서 FormData 객체를 생성
+        //      const formData = new FormData(document.getElementById(폼아이디));
+        //      const formData = new FormData($('#폼아이디')[0]);
+        // <form>이 없는 경우(지금)
+        //      const formData = new FormData();
+        //      formData.append('photo', $('#photo')[0].files[0]);
+        //              $('#photo')[0] -> <input type='file' id='photo'>
+        //              file 요소는 파일을 여러개 선택할 수 있다(multiple을 지정한 경우)
+        //              그래서 선택한 파일들이 files라는 배열을 이룬다
+        // $.ajax 함수에서는 processData, contentType을 false로 지정해야 한다
+
+        // processData : false
+        // $.ajax 함수는 자바스크립트 객체를 data로 주면 urlencoded 형식으로 자동 변환
+        //          (processData:true)
+        // formData를 넘길때는 processData 처리를 막아야한다
+
+        // contentType -> MIME type
+        // formData를 넘길 때는 contentType을 form-data라고 줘야 하는데
+        // 그 옵션이 contentType: false
+
+        $(document).ready(function() {
+            $('#add').click(function() {
+                // 이름, 주소, 연락처로 주소를 추가
+                // 자바스크립트를 객체를 만들어 data로 넘긴다
+                const params = {
+                    name: $('#name').val(),
+                    address: $('#address').val(),
+                    tel:$('#tel').val()
+                };
+                $.ajax({
+                    url: 'http://sample.bmaster.kro.kr/contacts',
+                    method: 'post',
+                    data: params,
+                    success:function(result) {
+                        // 주소 추가에 성공한 경우 사진을 변경
+                        const formData = new FormData();
+                        formData.append('photo', $('#photo')[0].files[0]);
+                        $.ajax({
+                            url: 'http://sample.bmaster.kro.kr/contacts/' + result.no + '/photo',
+                            method: 'post',
+                            data:formData,
+                            processData: false,
+                            contentType: false,
+                            success:function(result) {
+                                console.log(result);
+                                // location.href = "list.html";
+                            }
+                        })
+                    }
+                })
+            })
+        })
+    </script>
 </head>
 <body>
-    <div id='page'>
-        <header>
-            <h1>My Diary</h1>
-        </header>
-        <nav id='nav' class="navbar navbar-inverse">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="list.html">MyDiary</a>
-                </div>
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="join.html">회원가입</a></li>
-                    <li><a href="login.html">로그인</a></li>
-                    <li><a href="write.html">글쓰기</a></li>
-                    <li><a href="#" id='logout'>로그아웃</a></li>
-                </ul>
-            </div>
-        </nav>
-        <div id="main">
-            <section></section>
-            <aside>광고</aside>
-        </div>
-        <footer>copyright &copy2021 ICIA all right reserved</footer>
-    </div>
+    <!--
+        사용자는 이름,사진,주소,연락처를 입력하고 추가 버튼을 클릭
+        api서버가 주소 추가와 사진 변경이 따로 만들어져 있기 때문에
+            $.ajax() 요청을 두번 보내서 처리하겠다
+    -->
+    이름:<input type="text" id="name"><br>
+    주소:<input type="text" id="address"><br>
+    연락처:<input type="text" id="tel"><br>
+    사진:<input type="file" id="photo"><br>
+    <button id='add'>주소 추가</button>
 </body>
 </html>

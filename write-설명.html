@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 웹에서 문서 형식을 지정하는 방법(MIME type) 
+        예를 들어 웹으로 파워포인트 문서를 열면...
+            파워포인트가 깔려 있으면 파워포인트를 실행해서 연다
+            파워포인트가 없으면 다운로드
+        파워포인트 파일이라는 사실을 어떻게 알지? MIME 타입
+            application/excel, application/hwp, application/json
+            image/jpg, image/gif....
+    -->
+    <!--
+        서버로 값을 보내는 방식 : urlencoded, json, form-data
+    -->
+
+    <!-- POST /contacts   주소 추가     urlencoded 또는 application/json-->
+    <form action="/contacts" method="post" enctype="application/x-www-form-urlencoded">
+        <input type="text" name="name" id="name">
+        <input type="text" name="address" id="address">
+        <input type="text" name="tel" id="tel">
+    </form>
+
+    <!-- 변경하는 건 PUT. 사진변경은 왜 POST냐? 파일업로드는 POST만 가능 -->
+    <!-- POST /contacts/번호/photo 사진변경 -->
+    <form action="/contacts/번호/photo" method="post" enctype="multipart/form-data">
+        <input type="file" name="photo" id="photo">
+        <button></button>
+    </form>
+
+</body>
+</html>
