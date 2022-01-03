@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 게시판을 만들 수 있다 -> 페이징을 할 수 있다 -> pagination -->
+    <!--
+        글이 111개, 페이지 크기가 10일때
+        
+        첫번째 블록 : 1 2 3 4 5 다음    
+
+        중간 블록들 : 이전 6 7 8 9 10  다음
+
+        마지막 블록 : 이전 11 12
+    -->
+
+    <!--
+        연락처가 100개, 페이지크기는 10개, 블록당페이지수 5개 라면
+        0번째 블록 : 1 2 3 4 5 다음(6) 
+        1번째 블록 : 이전(5) 6 7 8 9 10 다음(11)
+        2번째 블록 : 11 12 13 14 15
+
+        서버의 응답 : pageno, pagesize(10), totalcount(100), [pagePerBlock: 5]
+            MVC 방식 : 백이 프론트를 지배하는 관계
+                pagination을 하기 위한 값을 계산을 해서 계산 결과를 보내준다
+            REST 방식 : 프론트와 백은 계약 관계
+                pageno, pagesize, totalcount로 pagination을 하기 위한 값을 계산
+        블록번호를 계산했다면
+        blockNo     startPage                                   endPage
+        0           1                                           5
+        1           6                                           10
+        2           11                                          15
+                    blockNo*pagePerBlock+1                      startPage+pagePerBlock-1
+
+        blockNo를 어떻게 계산할 것인가?
+        pageno          blockNo                         Math.floor(pageno/pagePerBlock)
+        1                  0                                        0
+        2                  0                                        0
+        3                  0                                        0                                        
+        4                  0                                        0
+        5                  0                                        1
+        6                  1                                        1
+        7                  1                                        1
+        8                  1                                        1
+        9                  1                                        1
+        10                 1                                        2
+        11                 2                                        2                                     
+
+        const blockNo = Math.floor(pageno/pagePerBlock);
+        if(pageno%pagePerBlock==0)
+            blockNo--;
+    -->
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            countOfPage : 13
+            pageno       blockNo    prev       sP           eP          next
+            1~5             0         0         1           5             6
+            6~10            1         1         6           10           11
+            11~13           2         10        11        15->13         16->0
+        */
+        const pagesize = 10;
+        const totalcount = 143;
+        const pagePerBlock = 5;
+
+        // totalcount       pagesize        countOfPage     +1
+        //  119                 10              11          12
+        //  120                 10              12          13  -> -1
+        //  121                 10              12          13
+        let countOfPage = Math.floor(totalcount/pagesize) + 1;
+        if(totalcount%pagesize==0) {
+            countOfPage--;
+        }
+
+        for(let pageno=1; pageno<=countOfPage; pageno++) {
+            let blockNo = Math.floor(pageno/pagePerBlock);
+            if(pageno%pagePerBlock==0) {
+                blockNo--;
+            }
+            const startPage = blockNo * pagePerBlock + 1;
+            const prev = startPage - 1;
+            let endPage = startPage + pagePerBlock - 1;
+            let next = endPage + 1;
+            if(endPage>=countOfPage) {
+                endPage = countOfPage;
+                next = 0;
+            }
+
+            console.log(pageno + " " + blockNo + " " + prev + " " + startPage + " " + endPage + " " + next);
+        }
+    </script>
+</body>
+</html>

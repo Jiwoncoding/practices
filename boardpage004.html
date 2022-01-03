@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // pageno, pagesize, totalcount, pagePerBlock;
+        // /contacts?pageno=1&pagesize=10
+        const PAGE_SIZE = 10;
+        const PAGE_PER_BLOCK = 5;
+
+        function getPagination(pageno, totalcount) {
+            // countOfPage -> blockNo -> sp, ep
+            let countOfPage = Math.floor(totalcount/PAGE_SIZE)+1;
+            if(totalcount%PAGE_SIZE==0) {
+                countOfPage--;
+            }
+            
+            let blockNo = Math.floor(pageno/PAGE_PER_BLOCK);
+            if(pageno%PAGE_PER_BLOCK==0) {
+                blockNo--;
+            }
+
+            const startPage = blockNo * PAGE_PER_BLOCK + 1;
+            const prev = startPage - 1;
+            let endPage = startPage + PAGE_PER_BLOCK - 1;
+            let next = endPage + 1;
+
+            if(endPage>=countOfPage) {
+                endPage = countOfPage;
+                next = 0;
+            }
+
+            // prev, sp, ep, next를 리턴해야 한다
+            // 여러개의 값을 리턴할 수는 없다 -> 객체를 만들어서 리턴
+            // return { prev: prev, startPage : startPage, endPage: endPage, next: next };
+
+            // ES6에서는 객체 속성이름과 값을 저장한 변수 이름이 같을 때 아래처럼 짧게 적을 수 있다 
+            // -> 구조분해할당
+            return { prev, startPage, endPage, next};
+        }
+
+        const pagination = getPagination(11, 123);
+        console.log(pagination);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

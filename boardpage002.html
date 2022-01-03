@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const pagesize = 10;
+        const totalcount = 100;
+        const pagePerBlock = 5;
+        /*
+            pageno     blockNo      prev        startPage       endPage     next
+            1~5           0           0             1               5          6
+            6~10          1           5             6               10       11->0
+        */
+
+        for(let pageno=1; pageno<=10; pageno++) {
+            let blockNo = Math.floor(pageno/pagePerBlock);
+            // pageno: 1~5 ->  0 0 0 0 1
+            // 5의 배수인 경우 blockNo를 1빼줘야 한다
+            if(pageno%pagePerBlock==0) {
+                blockNo--;
+            }
+            const startPage = blockNo*pagePerBlock + 1;
+            const prev = startPage -1;
+            const endPage = startPage + pagePerBlock -1;
+            let next = endPage + 1;
+            console.log(pageno + " " + blockNo + " " + prev + " " + startPage + " " + endPage + " " + next);
+        }
+
+    </script>
+</body>
+</html>
