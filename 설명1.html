@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Document</title>
+    <script>
+        /*
+            1. 사용자가 pageno를 어떻게 선택하게 할 건가>
+                005.html?pageno=11          legacy한 파라미터   ->  location.search
+                005.html/11                 REST방식의 파라미터
+            2. 서버에 $.ajax 요청을 보낸다
+                api 서버 주소 : http://sample.bmaster.kro.ko/contacts
+                method : get
+                data : pageno=[pageno]&pagesize=[PAGE_SIZE]
+                응답(result) : pageno, pagesize, totalcount, contacts 배열 
+                    각 함수에 꼭 필요한 응답만 파라미터로 전달하겠다
+            3. 서버의 응답을 가지고 pagination을 계산한다
+                totalcount, pagesize(10) -> countOfPage
+                pageno, pagePerBlock(5) -> blockNo
+                blockNo, pagePerBlock -> startPage -> prev, endPage, next
+                마지막 블록인 경우 endPage=countOfPage, next=0
+            4. 서버의 응답을 가지고 주소를 출력한다
+                contacts에 반복문 적용
+                    no, name, address, tel을 tr에 appendTo한다
+                    name의 경우 주소록을 볼수있는 링크를 건다
+            5. pagination을 출력한다
+                prev가 0보다 크면 이전으로 링크 출력
+                startPage부터 endPage가 li 출력
+                next가 0보다 크면 다음으로 링크 출력
+        */
+    </script>
+</head>
+<body>
+    <div id="page">
+        <div id="contacts">
+        </div>
+        <div id="pagination">
+        </div>
+    </div>
+</body>
+</html>

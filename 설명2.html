@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Document</title>
+    <script>
+        // 1. 사용자가 pageno를 선택하는 방법
+        //      005.html?pageno=11          legacy한 파라미터   -> location.search
+        //      005.html/11                 REST방식의 파라미터 -> location.href
+        function getPageno() {
+            // indexOf는 문자열 안에서 =를 찾는다
+            // 성공하면 위치값, 실패하면 -1
+            const index = location.search.indexOf('=');
+
+            // 11을 잘라낸다(찾아낸 = 다음부터 자른다)
+            const param = location.search.substr(index+1);
+
+            // pageno가 잘못된 값인 경우 list.html?pageno=1로 redirect
+            alert(param)
+            const pageno = parseInt(param);
+            if(isNaN(pageno)==true) {
+                location.href = "list.html?pageno=1";
+            } else
+                return pageno;
+        }
+
+        getPageno();
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
