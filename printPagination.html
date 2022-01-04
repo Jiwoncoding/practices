@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Document</title>
+    <script>
+        // 주소
+        // 004.html                     이 경우는 수동으로 pageno는 1로 지정
+        // 004.html?pageno=1
+        const positionOfEqual = location.search.indexOf('=');
+
+        // locatio.search를 자른다. 004.html을 바로 실행한 경우 빈문자열이다
+        const param = location.search.substr(positionOfEqual+1);
+        let pageno = 1;
+        if(param!="") 
+            pageno = parseInt(param);
+        const PAGE_SIZE = 10;
+        const PAGE_PER_BLOCK = 5;
+
+        function getPagination(result) {
+            const totalcount = result.totalcount;
+            let countOfPage = Math.floor(totalcount/PAGE_SIZE) + 1;
+            if(totalcount%PAGE_SIZE==0) 
+                countOfPage--;
+            let blockNo = Math.floor(pageno/PAGE_PER_BLOCK);
+            if(pageno%PAGE_PER_BLOCK==0)
+                blockNo--;
+            console.log(blockNo);
+            const startPage = blockNo * PAGE_PER_BLOCK + 1;
+            const prev = startPage - 1;
+            let endPage = startPage + PAGE_PER_BLOCK - 1;
+            let next = endPage + 1;
+            if(endPage>=countOfPage) {
+                endPage = countOfPage;
+                next = 0;
+            }
+
+            // 0 1 5 6      1 2 6 7
+            console.log({prev, startPage, endPage, next});
+            return {prev, startPage, endPage, next};
+        }
+
+        function printContacts(contacts) {
+            const $list = $('#list');
+            $.each(contacts, function(idx, contact) {
+                const $tr = $('<tr>').appendTo($list);
+                $('<td>').text(contact.no).appendTo($tr);
+                const $td = $('<td>').appendTo($tr);
+                $('<a>').attr('href','#').text(contact.name).appendTo($td);
+                $('<td>').text(contact.address).appendTo($tr);
+                $('<td>').text(contact.tel).appendTo($tr);
+            });
+        }
+
+        function printPagination(pagination) {
+            const $pagination = $('#pagination_div').find('.pagination');
+            console.log($pagination);
+            if(pagination.prev>0) {
+                const $prev = $('<li>').appendTo($pagination);
+                $('<a>').attr('href','004.html?pageno='+pagination.prev).text('이전').appendTo($prev);
+                
+            }
+            for(let i=pagination.startPage; i<=pagination.endPage; i++) {
+                const $li = $('<li>').appendTo($pagination);
+                if(pageno==i) 
+                    $li.attr('class','active');
+                $('<a>').attr('href','004.html?pageno='+i).text(i).appendTo($li);
+            }
+            if(pagination.next>0) {
+                const $next = $('<li>').appendTo($pagination);
+                $('<a>').attr('href','004.html?pageno='+pagination.next).text('다음').appendTo($next);
+            }
+        }
+        
+        $(document).ready(function() {
+            /*
+            $.ajax('http://sample.bmaster.kro.kr/contacts?pageno=2&pagesize=4').done(()=> { });
+
+            $.ajax({
+                url: 'http://sample.bmaster.kro.kr/contacts?pageno=2&pagesize=4',
+                success:function() {
+                }
+            })
+            */
+            const url = 'http://sample.bmaster.kro.kr/contacts?pageno=' + pageno + '&pagesize=' + PAGE_SIZE;
+            $.ajax(url).done((result)=> {
+                const pagination = getPagination(result);    
+                printContacts(result.contacts);
+                printPagination(pagination);
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="page">
+        <div id="list_div">
+            <table class='table'>
+                <thead>
+                    <tr>
+                        <th>번호</th>
+                        <th>이름</th>
+                        <th>주소</th>
+                        <th>연락처</th>
+                    </tr>
+                </thead>
+                <tbody id='list'>
+                </tbody>
+            </table>
+        </div>
+        <div id="pagination_div" style='text-align: center;'>
+            <ul class="pagination">
+            </ul>
+        </div>
+    </div>    
+</body>
+</html>
