@@ -1,67 +1,119 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="main.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <script>
-        // 로그인했다면 list.html로 보내버리자
-        if(sessionStorage.getItem('username')!=null) {
-            location.href = "list.html";
-        }
-
-        $(document).ready(function() {
-            // 로그인했으면 13라인에의해 list.html로 이동
-            // 즉 여기가 실행됐다는 말은 현재 비로그인
-            $('.nav li').css('display','none');
-            $('#join').css('display','inline-block');
-            $('#login').css('display','inline-block');
-
-            $('#join').click(function() {
-                const username = $('#username').val();
-                const password = $('#password').val();
-
-                localStorage.setItem('username', username);
-                localStorage.setItem('password', password);
-
-                location.href = "login.html";
-            });
-        })
-    </script>
-    <title>Document</title>
+<meta charset="UTF-8">
+<link rel='stylesheet' href="http://localhost:8081/contacts/css/main.css">
+<style>
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="http://localhost:8081/contacts/script/main.js"></script>
+<script>
+	// 이름			필수				영문 4~10자				^[A-Za-z]{4,10}$
+	// 연락처			필수				010-1111-2222      		^[0-9]{3}-[0-9]{4}-[0-9]{4}$
+	// 주소			필수					X
+	// 사진			선택					X               	크기는 최대 1MB
+	function loadPhoto() {
+		const file = $('#photo')[0].files[0];
+		const MAX_SIZE = 1024*1024;
+		if(file.size>MAX_SIZE) {
+			alert('사진은 최대 1MB입니다');
+			// return false를 하면 loadPhoto 함수는 중간에 종료된다
+			// 하지만 <input type='file' id='photo'>에서는 파일이 여전히 선택되어 있다
+			$('#photo').val("");
+			
+			// 출력중인 사진을 지울려니까 높이가 0이 되는 문제가 발생(height는 300인데 적용이 안되더라)
+			// 그래서 <img>를 <div>안에 넣고, <img> 삭제 후 다시 붙여줬다
+			$('#show_photo_area').empty();
+			$('<img height="300px">').attr('id','show_photo').appendTo($('#show_photo_area'));
+			return false;
+		}
+		const reader = new FileReader();
+		reader.readAsDataURL(file);
+		reader.onload = function() {
+			$('#show_photo').attr('src', reader.result);
+		}	
+	}
+	
+	function inputCheck() {
+		// 필수입력 체크 -> 패턴 체크 -> 오류메시지 출력 후 return false -> 체크 성공했다면 js 객체 리턴
+		const name = $('#name').val();
+		const tel = $('#tel').val();
+		const address = $('#address').val();
+		const namePattern = /^[A-Za-z]{4,10}$/;
+		const telPattern = /^[0-9]{3}-[0-9]{4}-[0-9]{4}$/;
+		if(name=="") {
+			alert('이름은 필수입력입니다');
+			return false;
+		} else if(namePattern.test(name)==false) {
+			alert("이름은 알파벳 4~10자입니다");
+			return false;
+		} else if(tel=="") {
+			alert('연락처는 필수입력입니다');
+			return false;
+		} else if(telPattern.test(tel)==false) {
+			alert("연락처는 000-1234-5678 형식입니다");
+			return false;
+		} else if(address=="") {
+			alert('주소는 필수입력입니다');
+			return false;
+		}
+		return {name, tel, address};
+	}
+	
+	$(document).ready(function() {
+		$('#photo').change(loadPhoto);
+		$('#join').click(function() {
+			const params = inputCheck();
+			console.log(params);
+			if(params==false)
+				return false;
+		});
+	});
+</script>
+<title>Insert title here</title>
 </head>
 <body>
-    <div id='page'>
-        <header>
-            <h1>My Diary</h1>
-        </header>
-        <nav id='nav' class="navbar navbar-inverse">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="list.html">MyDiary</a>
-                </div>
-                <ul class="nav navbar-nav">
-                    <li id="join"><a href="join.html">회원가입</a></li>
-                    <li id="login"><a href="login.html">로그인</a></li>
-                    <li id="write"><a href="write.html">글쓰기</a></li>
-                    <li id='logout'><a href="#">로그아웃</a></li>
-                </ul>
-            </div>
-        </nav>
-        <div id="main">
-            <section>
-                <h1>회원 가입</h1>
-                아이디 : <input type="text" id="username"><br>
-                비밀번호 : <input type="password" id="password"><br>
-                <button id='join'>회원 가입</button>
-            </section>
-            <aside>광고</aside>
-        </div>
-        <footer>copyright &copy2021 ICIA all right reserved</footer>
-    </div>
+	<div id="page">
+		<header id="header">
+		</header>
+		<nav id="nav">
+		</nav>
+		<div id="main">
+			<aside id="aside">
+			</aside>
+			<section>
+				<table>
+					<tr>
+						<td colspan="2">
+							<div id='show_photo_area'>
+								<img id='show_photo' height='300px;'>
+							</div>	
+						</td>
+					</tr>
+					<tr>
+						<td>사진 선택</td>
+						<td><input type='file' id='photo'></td>
+					</tr>
+					<tr>
+						<td>이름</td>
+						<td><input type="text" name="" id="name" ></td>
+					</tr>
+					<tr>
+						<td>연락처</td>
+						<td><input type="text" name="" id="tel" ></td>
+					</tr>
+					<tr>
+						<td>주소</td>
+						<td><input type="text" name="" id="address" ></td>
+					</tr>
+					<tr>
+						<td colspan="2"><button id='join'>가입</button></td>
+					</tr>
+				</table>
+			</section>
+		</div>
+		<footer id="footer">
+		</footer>
+	</div>
 </body>
 </html>
